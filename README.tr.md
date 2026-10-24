@@ -1,7 +1,12 @@
 <div align="center">
 
   <h1>✨ Didiyos Backend — C# / .NET 8 Modular Monolith</h1>
-  <p><strong>Modern, Scalable & High-Performance Social Event & Photo Sharing Platform Backend</strong></p>
+  <p><strong>Modern, Scalable <p><strong>Modern, Scalable & High-Performance Social Event & Photo Sharing Platform Backend</strong></p> High-Performance Social Event <p><strong>Modern, Scalable & High-Performance Social Event & Photo Sharing Platform Backend</strong></p> Photo Sharing Platform Backend</strong></p>
+
+  <p>
+    <a href="README.md"><strong>English</strong></a> •
+    <a href="README.tr.md"><strong>Türkçe</strong></a>
+  </p>
 
   <p>
     <img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 8" />
