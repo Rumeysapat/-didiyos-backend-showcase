@@ -1,7 +1,12 @@
 <div align="center">
 
-  <h1>✨ Didiyos Backend — C# / .NET 8 Modular Monolith</h1>
-  <p><strong>Modern, Scalable & High-Performance Social Event & Photo Sharing Platform Backend</strong></p>
+  <h1>✨ Didiyos Backend — .NET 8 Modular Monolith</h1>
+  <p><strong>A Highly Scalable, Clean-Architected Backend for Social Events & Photo Sharing Platforms</strong></p>
+
+  <p>
+    <a href="README.md"><strong>English</strong></a> •
+    <a href="README.tr.md"><strong>Türkçe</strong></a>
+  </p>
 
   <p>
     <img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 8" />
@@ -10,81 +15,81 @@
     <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis" />
     <img src="https://img.shields.io/badge/JWT-Blacklist-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white" alt="JWT" />
     <img src="https://img.shields.io/badge/Firebase-FCM-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
-    <img src="https://img.shields.io/badge/Sentry-Monitoring-362D59?style=for-the-badge&logo=sentry&logoColor=white" alt="Sentry" />
+    <img src="https://img.shields.io/badge/Sentry-APM-362D59?style=for-the-badge&logo=sentry&logoColor=white" alt="Sentry" />
     <img src="https://img.shields.io/badge/Tests-xUnit%20%7C%20Moq-27AE60?style=for-the-badge" alt="Tests" />
   </p>
 
   <p>
-    <em>Bu repo, <strong>Didiyos</strong> projesinin kurumsal düzeyde tasarlanmış <strong>.NET 8 Backend</strong> mimarisinin halka açık mimari ve teknik sunumudur (Showcase / Architecture Portfolio). Çekirdek iş mantığı ve kaynak kodları özel (private) depoda korunmaktadır.</em>
+    <em>This repository serves as the public <strong>architectural showcase & technical portfolio</strong> for the <strong>Didiyos</strong> backend platform. Core domain business logic and private codebases are securely retained in private repositories.</em>
   </p>
 
 </div>
 
 ---
 
-## 📌 İçindekiler
-- [Hakkında (Overview)](#-hakkında-overview)
-- [Arayüz & Kullanıcı Deneyimi (UI Showcase)](#-arayüz--kullanıcı-deneyimi-ui-showcase)
-- [Sistem Mimarisi (Architecture)](#-sistem-mimarisi-architecture)
-- [Temel Mühendislik & Tasarım Desenleri](#-temel-mühendislik--tasarım-desenleri)
-  - [1. CQRS & Otomatik Redis Pipeline Önbellekleme](#1-cqrs--otomatik-redis-pipeline-önbellekleme)
-  - [2. Güvenlik: JWT + Redis Token Blacklisting](#2-güvenlik-jwt--redis-token-blacklisting)
-  - [3. Domain-Driven Design (DDD) & Zengin Domain Modelleri](#3-domain-driven-design-ddd--zengin-domain-modelleri)
-  - [4. Çok Dilli (i18n) Global Result Filtresi](#4-çok-dilli-i18n-global-result-filtresi)
-  - [5. Sliding Window Rate Limiter](#5-sliding-window-rate-limiter)
-  - [6. Firebase Cloud Messaging (FCM) & Event Handlers](#6-firebase-cloud-messaging-fcm--event-handlers)
-- [Modüler Monolit Yapısı](#-modüler-monolit-yapısı)
-- [API & Swagger Uç Noktaları](#-api--swagger-uç-noktaları)
-- [Test & Kalite Güvencesi](#-test--kalite-güvencesi)
-- [Teknoloji Yığını (Tech Stack)](#-teknoloji-yığını-tech-stack)
-- [Yerel Kurulum & Çalıştırma](#-yerel-kurulum--çalıştırma)
+## 📌 Table of Contents
+- [Overview](#-overview)
+- [Client UI Showcase](#-client-ui-showcase)
+- [System Architecture](#-system-architecture)
+- [Core Engineering Highlights](#-core-engineering-highlights)
+  - [1. CQRS & Automated Redis Pipeline Caching](#1-cqrs--automated-redis-pipeline-caching)
+  - [2. Security: JWT & Distributed Token Blacklisting](#2-security-jwt--distributed-token-blacklisting)
+  - [3. Domain-Driven Design (DDD) & Rich Domain Models](#3-domain-driven-design-ddd--rich-domain-models)
+  - [4. Global Localization (i18n) Result Filter](#4-global-localization-i18n-result-filter)
+  - [5. Sliding Window IP Rate Limiting](#5-sliding-window-ip-rate-limiting)
+  - [6. Firebase Cloud Messaging (FCM) & In-Process Domain Events](#6-firebase-cloud-messaging-fcm--in-process-domain-events)
+- [Modular Monolith Directory Layout](#-modular-monolith-directory-layout)
+- [API & Swagger Endpoints](#-api--swagger-endpoints)
+- [Testing & Quality Assurance](#-testing--quality-assurance)
+- [Technology Stack](#-technology-stack)
+- [Local Setup & Running](#-local-setup--running)
 
 ---
 
-## 📖 Hakkında (Overview)
+## 📖 Overview
 
-**Didiyos**, kullanıcıların etkinlikler oluşturabildiği, etkinliklere özel anı fotoğrafları paylaşabildiği, diğer kullanıcıları takip edip anlık bildirimler alabildiği kapsamlı bir sosyal etkinlik ve anı paylaşım platformudur.
+**Didiyos** is an interactive social platform where users can organize events, capture and share memory albums, follow friends, and receive real-time push notifications.
 
-Backend servisi, yüksek eşzamanlı istekleri en düşük gecikmeyle karşılamak, temiz kod pratiklerini korumak ve güvenliği en üst seviyede tutmak amacıyla **Modular Monolith**, **Clean Architecture**, **CQRS (Command Query Responsibility Segregation)** ve **Domain-Driven Design (DDD)** prensiplerine sadık kalınarak geliştirilmiştir.
+The backend infrastructure is engineered to deliver low-latency responses under concurrent workloads, maintain strict domain boundaries, and ensure enterprise-grade security. It is built adhering to **Modular Monolith**, **Clean Architecture**, **CQRS (Command Query Responsibility Segregation)**, and **Domain-Driven Design (DDD)** principles.
 
 ---
 
-## 📱 Arayüz & Kullanıcı Deneyimi (UI Showcase)
+## 📱 Client UI Showcase
 
-Backend servislerinin beslediği Didiyos platformuna ait temel mobil ve web arayüzleri:
+Screenshots of the mobile and web client interfaces powered by the Didiyos C# backend:
 
-| Keşfet & Etkinlik Akışı | Etkinlik Detayı & Katılım |
+| Event Feed & Discovery | Event Detail & Attendance |
 |:---:|:---:|
 | <img src="docs/images/feed-screen.png" alt="Feed Screen" width="380" /> | <img src="docs/images/event-detail-screen.png" alt="Event Detail" width="380" /> |
 
-| Profil & Sosyal Etkileşim | Etkinlik Oluşturma Formu |
+| User Profile & Social Network | Create New Event Form |
 |:---:|:---:|
 | <img src="docs/images/profile-screen.png" alt="Profile Screen" width="380" /> | <img src="docs/images/create-event-screen.png" alt="Create Event" width="380" /> |
 
-| Güvenli Giriş (Login) | Kullanıcı Kaydı (Register) |
+| Secure Authentication (Login) | User Registration |
 |:---:|:---:|
 | <img src="docs/images/login-screen.png" alt="Login Screen" width="380" /> | <img src="docs/images/register-screen.png" alt="Register Screen" width="380" /> |
 
 ---
 
-## 🏛 Sistem Mimarisi (Architecture)
+## 🏛 System Architecture
 
-Proje; bağımsız işletilebilir modüllerden oluşan, gevşek bağlı (loosely coupled) ve yüksek uyumlu (high cohesion) bir **Modular Monolith** yapısında kurgulanmıştır.
+The application is structured as a **Modular Monolith**, ensuring loose coupling, high cohesion, and clear communication boundaries between business capabilities:
 
 ```mermaid
 graph TD
-    Client[Web & Mobil İstemciler] -->|HTTP / HTTPS| Gateway[ASP.NET Core Web API Host]
+    Client[Web & Mobile Clients] -->|HTTPS / REST API| Gateway[ASP.NET Core Web API Host]
     
-    subgraph Middlewares & Filters [Global Boru Hattı]
+    subgraph Middlewares & Filters [Global Request Pipeline]
         RateLimit[Sliding Window Rate Limiter]
-        AuthN[JWT Token & Blacklist Validator]
+        AuthN[JWT Token & Redis Blacklist Validator]
         LangFilter[Global LocalizeResponseFilter]
-        ErrMiddleware[Centralized Error Handling]
+        ErrMiddleware[Centralized Error Handling Middleware]
     end
 
     Gateway --> RateLimit --> AuthN --> LangFilter --> ErrMiddleware
 
-    subgraph Modular Application Core [Modüller - Clean Architecture / CQRS]
+    subgraph Modular Application Core [Modules - Clean Architecture / CQRS]
         AuthMod[Auth Module]
         UserMod[User Module]
         EventMod[Event Module]
@@ -94,11 +99,11 @@ graph TD
 
     ErrMiddleware --> ModularApplicationCore
 
-    subgraph Data & Cache Tier [Veri ve Entegrasyon Katmanı]
-        MongoDB[(MongoDB Cluster - NoSQL Data Store)]
-        Redis[(Redis - Caching & Token Blacklist)]
+    subgraph Data & Integration Tier [Persistence & Infrastructure Services]
+        MongoDB[(MongoDB Cluster - NoSQL Document Store)]
+        Redis[(Redis - Distributed Caching & Token Blacklist)]
         FCM[Firebase Cloud Messaging - Push Service]
-        Sentry[Sentry - APM & Error Tracking]
+        Sentry[Sentry - APM & Error Monitoring]
     end
 
     ModularApplicationCore --> MongoDB
@@ -109,15 +114,16 @@ graph TD
 
 ---
 
-## ⚡ Temel Mühendislik & Tasarım Desenleri
+## ⚡ Core Engineering Highlights
 
-### 1. CQRS & Otomatik Redis Pipeline Önbellekleme
-Mimaride sorgular (Queries) ve komutlar (Commands) kesin çizgilerle birbirinden ayrılmıştır:
+### 1. CQRS & Automated Redis Pipeline Caching
 
-- **Sorgular (Queries - Otomatik Cache):**  
-  Handler'lar içinde tekrarlayan manuel cache kodları yazılmaz. `ICacheableQuery` arayüzünü uygulayan tüm sorgular, MediatR boru hattına entegre edilen **`CachingBehavior<TRequest, TResponse>`** tarafından yakalanır. Veri önce Redis'ten taranır, varsa doğrudan döner; yoksa veritabanından çekilip belirlenen TTL ile önbelleğe yazılır.
-- **Komutlar (Commands - Hedefli Invalidation):**  
-  Yazma, güncelleme veya silme işlemleri çalıştırıldığında `IRedisService` doğrudan enjekte edilerek ilgili iş kuralına ait anahtarlar anında temizlenir (Cache Invalidation).
+Commands (state-mutating operations) and Queries (read operations) follow strict architectural isolation:
+
+- **Queries (Automated Pipeline Caching):**  
+  Application query handlers contain zero boilerplate caching code. Any query implementing the `ICacheableQuery` marker interface is automatically intercepted by MediatR's **`CachingBehavior<TRequest, TResponse>`**. The pipeline performs a cache lookup on Redis first; if missed, it executes the query via dedicated read-only Query Services and caches the result with a defined TTL.
+- **Commands (Targeted Cache Invalidation):**  
+  State modifications inject `IRedisService` directly into command handlers to invalidate specific cache keys immediately upon execution, ensuring real-time consistency.
 
 ```mermaid
 sequenceDiagram
@@ -132,13 +138,13 @@ sequenceDiagram
     Client->>MediatR: Send(GetEventByIdQuery)
     MediatR->>CacheBehavior: Intercept Request
     CacheBehavior->>Redis: GetAsync(cacheKey)
-    alt Cache Hit (Önbellekte Var)
+    alt Cache Hit
         Redis-->>CacheBehavior: Cached Response JSON
-        CacheBehavior-->>Client: 200 OK (Ultra Hızlı Yanıt)
-    else Cache Miss (Önbellekte Yok)
+        CacheBehavior-->>Client: 200 OK (Sub-millisecond latency)
+    else Cache Miss
         Redis-->>CacheBehavior: null
         CacheBehavior->>QueryHandler: Handle(query)
-        QueryHandler->>Mongo: Execute Optimized Read
+        QueryHandler->>Mongo: Execute Optimized Read Projection
         Mongo-->>QueryHandler: Data Entity
         QueryHandler-->>CacheBehavior: Query Result
         CacheBehavior->>Redis: SetAsync(cacheKey, result, TTL)
@@ -148,175 +154,181 @@ sequenceDiagram
 
 ---
 
-### 2. Güvenlik: JWT + Redis Token Blacklisting
-Sisteme giriş yapan kullanıcılara standart süreye sahip JWT erişim anahtarları verilir. Kullanıcı çıkış yaptığında (`Logout`) veya güvenlik ihlali tespit edildiğinde, JWT'ye gömülü benzersiz `tokenId` Redis üzerinde karalisteye (`blacklist:{tokenId}`) eklenir.
+### 2. Security: JWT & Distributed Token Blacklisting
 
-ASP.NET Core `JwtBearerEvents.OnTokenValidated` aşamasında Redis kontrolü yapılır; karalistedeki token'lar süresi dolmamış olsa bile anında **401 Unauthorized** ile reddedilir.
+Authentication utilizes JSON Web Tokens (JWT) signed with symmetric encryption. To support immediate session revocation (e.g., on `Logout` or security compromise), each token contains a unique `tokenId`.
+
+Revoked token IDs are stored in Redis under `blacklist:{tokenId}`. The ASP.NET Core `JwtBearerEvents.OnTokenValidated` hook checks this blacklist on every authenticated request, returning **401 Unauthorized** for invalid sessions even if the token expiration date is still valid.
 
 <div align="center">
   <img src="docs/images/auth-architecture.png" alt="Auth Architecture & Token Lifecycle" width="800" />
-  <p><em>Şekil 1: Kimlik Doğrulama, Token ve Güvenlik Akış Mimarisi</em></p>
+  <p><em>Figure 1: Authentication, Token Lifecycle & Distributed Blacklist Architecture</em></p>
 </div>
 
 ---
 
-### 3. Domain-Driven Design (DDD) & Zengin Domain Modelleri
-Anemic Domain Model yaklaşımı yerine, tüm iş kurallarını kendi içerisinde doğrulayan **Rich Domain Entity** ve **Value Object** mimarisi uygulanmıştır:
+### 3. Domain-Driven Design (DDD) & Rich Domain Models
 
-- **Özel Alan Kapsülleme (Private Setters):** Varlık alanları doğrudan dışarıdan değiştirilemez; yalnızca varlık üzerindeki anlamlı metodlar (`ValidateFollow`, `ValidateUnfollow`, `VerifyAndExtendRefreshToken`) aracılığıyla güncellenir.
-- **Değer Nesneleri (Value Objects):**
-  - `EmailAddress`: E-posta format doğrulaması, onay jetonu (`VerificationToken`) ve süre kurallarını saklar.
-  - `PasswordReset`: Şifre sıfırlama taleplerini ve geçerlilik sürelerini yönetir.
-  - `UserSession`: Oturum anahtarları (`TokenId`, `RefreshToken`) ve oturum tazeleme kurallarını yönetir.
-- **Özelleştirilmiş İstisna Hiyerarşisi:** Kod tabanında magic number (400, 401, 403, 404, 429) durum kodları yerine `NotFoundException`, `BadRequestException`, `ForbiddenException`, `ConflictException`, `UnauthorizedException` ve `TooManyRequestsException` gibi amaca yönelik istisnalar fırlatılır.
+To avoid the pitfalls of Anemic Domain Models, all core business rules and state validations are encapsulated directly within **Rich Entities** and **Immutable Value Objects**:
 
----
-
-### 4. Çok Dilli (i18n) Global Result Filtresi
-Sistem `tr-TR`, `en-US`, `de-DE` ve `sv-SE` olmak üzere 4 farklı dili destekler.
-- `LocalizeResponseFilter`: Kontrolörler yanıt üretirken yerelleştirme servisine bağımlı olmak zorunda kalmaz; doğrudan standart çeviri anahtarlarını (Localization Keys) dönerler.
-- Global Result Filter, istemcinin `Accept-Language` başlığına göre JSON yanıtlarındaki başarı ve bilgilendirme mesajlarını çalışma zamanında otomatik olarak ilgili dile çevirir.
+- **Strict Encapsulation (`private set;`):** Entity properties cannot be modified arbitrarily from outside. State changes require explicit domain methods (`ValidateFollow`, `ValidateUnfollow`, `VerifyAndExtendRefreshToken`).
+- **Immutable Value Objects:**
+  - `EmailAddress`: Validates structure, trims/lowercases inputs, and verifies tokens (`ValidateVerification`).
+  - `PasswordReset`: Enforces expiration checks and state updates for credential recovery.
+  - `UserSession`: Manages token identification, refresh tokens, and lifetime policies.
+- **Strongly Typed Exception Hierarchy:** Magic numbers in the application layer are replaced with typed HTTP exceptions (`NotFoundException` [404], `BadRequestException` [400], `ForbiddenException` [403], `ConflictException` [409], `UnauthorizedException` [401], `TooManyRequestsException` [429]).
 
 ---
 
-### 5. Sliding Window Rate Limiter
-Kötü niyetli istekleri ve brute-force saldırılarını engellemek amacıyla IP bazlı **Sliding Window Rate Limiter** uygulanmıştır:
-- **Kapasite:** 1 dakikalık pencerede segmentlere ayrılmış 100 izin limiti.
-- **Aşım Durumu:** Standart RFC formatında `429 Too Many Requests` yanıtı ve yerelleştirilmiş hata mesajı döner.
+### 4. Global Localization (i18n) Result Filter
+
+The API supports 4 locales: `tr-TR`, `en-US`, `de-DE`, and `sv-SE`.
+
+- **Decoupled Handlers:** Controllers and handlers do not reference `IStringLocalizer`. They return standardized translation keys.
+- **Global `LocalizeResponseFilter`:** An ASP.NET Core Action/Result filter intercepts successful API responses and dynamically resolves message keys based on the incoming `Accept-Language` header before serializing the JSON payload.
 
 ---
 
-### 6. Firebase Cloud Messaging (FCM) & Event Handlers
-Modüller arasındaki bağımlılığı en aza indirmek için MediatR Domain Event altyapısı kullanılır:
-- Örneğin bir kullanıcı başka bir kullanıcıyı takip ettiğinde `UserFollowedEvent` tetiklenir.
-- `Notification` modülündeki dinleyici (`UserFollowedHandler`), Firebase Admin SDK aracılığıyla hedef kullanıcının cihazına arka planda anlık bildirim (Push Notification) gönderir.
+### 5. Sliding Window IP Rate Limiting
+
+To protect API endpoints from brute-force attempts and denial-of-service spikes:
+- Utilizes ASP.NET Core's built-in **`PartitionedRateLimiter`** configured with a **Sliding Window** strategy.
+- Limit: 100 requests per 1-minute window partitioned across 6 segments per client IP.
+- Violations return an RFC-compliant `429 Too Many Requests` status with localized explanatory payloads.
 
 ---
 
-## 📂 Modüler Monolit Yapısı
+### 6. Firebase Cloud Messaging (FCM) & In-Process Domain Events
 
-Proje, Clean Architecture katmanlarını modül bazında organize eder:
+Inter-module decoupling is achieved using MediatR in-process domain events:
+- When a user follows another account, a `UserFollowedEvent` is published.
+- The `Notification` module subscribes via `UserFollowedHandler` and dispatches real-time mobile push notifications using the Firebase Admin SDK asynchronously.
+
+---
+
+## 📂 Modular Monolith Directory Layout
+
+The solution is divided into cohesive feature modules following Clean Architecture layers:
 
 ```text
 DidiyosCsharpBackend/
-├── DidiyosCsharpBackend.WebAPI/               # Host & API Gateway Katmanı
-│   ├── Controllers/                           # İnce (Thin) API Uç Noktaları
-│   ├── Middlewares/                           # Error, RateLimit, Localization Middleware'leri
-│   └── Program.cs                             # IoC, Pipeline & Modül Kayıtları
+├── DidiyosCsharpBackend.WebAPI/               # Host Application & API Gateway
+│   ├── Controllers/                           # Lightweight HTTP Controllers
+│   ├── Middlewares/                           # Error Handling, Localization, Rate Limiting
+│   └── Program.cs                             # Composition Root & DI Registrations
 │
-├── DidiyosCsharpBackend.Modules.Auth/         # Kimlik Doğrulama & Yetkilendirme Modülü
-│   ├── Application/                           # Commands, Handlers, DTOs, Validations
-│   └── Infrastructure/                        # Token Generator, Şifreleme Servisleri
+├── DidiyosCsharpBackend.Modules.Auth/         # Identity & Authentication Module
+│   ├── Application/                           # Commands, Handlers, DTOs, Token Services
+│   └── Infrastructure/                        # Password Hashing, JWT Generation
 │
-├── DidiyosCsharpBackend.Modules.User/         # Kullanıcı Profili & Sosyal Ağ Modülü
-│   ├── Application/                           # Takip/Takipten Çık, Profil Güncelleme
+├── DidiyosCsharpBackend.Modules.User/         # User Profiles & Social Graph Module
+│   ├── Application/                           # Follow/Unfollow, Profile Updates
 │   └── Infrastructure/                        # Mongo Repositories & UserQueryService
 │
-├── DidiyosCsharpBackend.Modules.Event/        # Etkinlik Yönetim Modülü
-│   ├── Application/                           # Etkinlik Oluşturma, Katılma, Listeleme
-│   └── Infrastructure/                        # EventQueryService & Mongo Veri Katmanı
+├── DidiyosCsharpBackend.Modules.Event/        # Event Management Module
+│   ├── Application/                           # Event Creation, RSVP, Location Queries
+│   └── Infrastructure/                        # EventQueryService & Spatial Mongo Indexing
 │
-├── DidiyosCsharpBackend.Modules.Photo/        # Fotoğraf & Gönderi Modülü
-│   ├── Application/                           # Fotoğraf Yükleme, Beğeni, Etkinlik Albümü
+├── DidiyosCsharpBackend.Modules.Photo/        # Photos & Media Module
+│   ├── Application/                           # Photo Uploads, Reactions, Event Albums
 │   └── Infrastructure/                        # PhotoRepository & PhotoQueryService
 │
-├── DidiyosCsharpBackend.Modules.Notification/ # Bildirim Modülü (FCM Entegrasyonu)
-│   └── Application/EventHandlers/             # MediatR Entegrasyon Olay Dinleyicileri
+├── DidiyosCsharpBackend.Modules.Notification/ # Notification Dispatcher Module
+│   └── Application/EventHandlers/             # MediatR In-Process Event Listeners (FCM)
 │
-├── DidiyosCsharpBackend.Shared/               # Çekirdek & Ortak Altyapı
-│   ├── Domain/Entities/                       # User ve Paylaşılan Varlıklar
+├── DidiyosCsharpBackend.Shared/               # Core Shared Kernel
+│   ├── Domain/Entities/                       # User & Shared Aggregate Roots
 │   ├── Domain/ValueObjects/                   # EmailAddress, PasswordReset, UserSession
-│   ├── Application/Behaviors/                 # CachingBehavior (Pipeline Cache)
+│   ├── Application/Behaviors/                 # CachingBehavior (Automatic Pipeline Cache)
 │   └── Infrastructure/Services/               # RedisService, LocalStorageService
 │
-└── DidiyosCsharpBackend.Tests/                # Kapsamlı Birim & Entegrasyon Testleri
-    ├── Modules/Auth/                          # Kimlik Doğrulama Testleri
-    ├── Modules/User/                          # Kullanıcı Modülü Testleri
-    └── Modules/Photo/                         # Fotoğraf Modülü Testleri
+└── DidiyosCsharpBackend.Tests/                # Unit & Integration Test Suites
+    ├── Modules/Auth/                          # Auth Command & Handler Tests
+    ├── Modules/User/                          # Social Graph & Domain Model Tests
+    └── Modules/Photo/                         # Media Upload & Query Service Tests
 ```
 
 ---
 
-## 🔌 API & Swagger Uç Noktaları
+## 🔌 API & Swagger Endpoints
 
-Tüm API uç noktaları Swagger / OpenAPI üzerinde dokümante edilmiştir ve `Bearer Token` ile `Accept-Language` parametrelerini destekler.
+All endpoints are documented with OpenAPI specifications, supporting `Bearer` tokens and `Accept-Language` headers:
 
-| Modül | Metod | Uç Nokta | Açıklama |
+| Module | Method | Endpoint | Description |
 |---|:---:|---|---|
-| **Auth** | `POST` | `/api/auth/register` | Yeni kullanıcı kaydı oluşturur ve doğrulama e-postası tetikler |
-| **Auth** | `POST` | `/api/auth/login` | JWT Erişim ve Yenileme (Refresh) jetonları üretir |
-| **Auth** | `POST` | `/api/auth/refresh-token` | Oturumu yeniler |
-| **Auth** | `POST` | `/api/auth/logout` | Token'ı Redis karalistesine alarak oturumu sonlandırır |
-| **User** | `GET` | `/api/user/{id}` | Kullanıcı profil detaylarını getirir (Redis Önbellekli) |
-| **User** | `PUT` | `/api/user/profile` | Profil bilgilerini ve biyografiyi günceller |
-| **User** | `POST` | `/api/user/{id}/follow` | Belirtilen kullanıcıyı takibe alır (FCM Bildirimi tetikler) |
-| **Event** | `GET` | `/api/event/feed` | Kullanıcıya özel ana akış etkinliklerini listeler |
-| **Event** | `POST` | `/api/event` | Yeni bir sosyal etkinlik oluşturur |
-| **Photo** | `POST` | `/api/photo/upload` | Etkinliğe anı fotoğrafı ekler |
-| **Photo** | `DELETE`| `/api/photo/{id}` | Fotoğrafı ve ilişkili kayıtları siler |
+| **Auth** | `POST` | `/api/auth/register` | Registers new user and sends verification email |
+| **Auth** | `POST` | `/api/auth/login` | Issues access token and refresh token |
+| **Auth** | `POST` | `/api/auth/refresh-token` | Rotates session tokens |
+| **Auth** | `POST` | `/api/auth/logout` | Adds token to Redis blacklist and revokes session |
+| **User** | `GET` | `/api/user/{id}` | Retrieves user profile with automated Redis caching |
+| **User** | `PUT` | `/api/user/profile` | Updates personal details and bio |
+| **User** | `POST` | `/api/user/{id}/follow` | Follows user and dispatches FCM notification |
+| **Event** | `GET` | `/api/event/feed` | Retrieves personalized event discovery feed |
+| **Event** | `POST` | `/api/event` | Creates a new social gathering event |
+| **Photo** | `POST` | `/api/photo/upload` | Uploads photo to event gallery |
+| **Photo** | `DELETE`| `/api/photo/{id}` | Deletes photo and cascades metadata updates |
 
 ---
 
-## 🧪 Test & Kalite Güvencesi
+## 🧪 Testing & Quality Assurance
 
-Projede Domain kuralları, Command/Query Handler mantıkları ve entegrasyonlar **xUnit**, **Moq** ve **FluentAssertions** ile test edilmektedir.
+Unit and integration test suites are written using **xUnit**, **Moq**, and **FluentAssertions** to ensure domain integrity and handler reliability:
 
 ```bash
-# Tüm testleri çalıştırmak için:
+# Execute test suite:
 dotnet test DidiyosCsharpBackend.sln
 ```
 
 ```text
-Test Çalıştırma Özeti:
-  Toplam Test: 35
-  Başarılı:   35
-  Başarısız:  0
-  Geçen Süre: ~1.8 sn
+Test Execution Summary:
+  Total Tests:  35
+  Passed:       35
+  Failed:       0
+  Execution:    ~1.8s
 ```
 
 ---
 
-## 🛠 Teknoloji Yığını (Tech Stack)
+## 🛠 Technology Stack
 
-- **Platform & Dil:** .NET 8, C# 12
-- **Mimari Yaklaşım:** Modular Monolith, Clean Architecture, CQRS, DDD
-- **Veritabanı:** MongoDB (Official C# Driver)
-- **Önbellek & Oturum:** Redis (StackExchange.Redis)
-- **Mesajlaşma & Olaylar:** MediatR (Pipeline Behaviors, In-Process Events)
-- **Yetkilendirme:** JWT (JSON Web Tokens) with Sliding Expiration & Redis Blacklist
-- **Hata Takibi:** Sentry SDK
-- **Bildirim:** Firebase Cloud Messaging (FCM Admin SDK)
-- **Güvenlik & Hız:** ASP.NET Core Rate Limiter, CORS Policies
-- **Dokümantasyon:** Swagger / OpenAPI with Swashbuckle
+- **Runtime & Language:** .NET 8, C# 12
+- **Architecture:** Modular Monolith, Clean Architecture, CQRS, DDD
+- **Database:** MongoDB (Official C# Driver)
+- **Cache & Token Store:** Redis (StackExchange.Redis)
+- **Messaging & Pipelines:** MediatR (Pipeline Behaviors, In-Process Events)
+- **Authentication:** JWT (JSON Web Tokens) with Redis Blacklist Revocation
+- **Monitoring & APM:** Sentry SDK
+- **Push Notifications:** Firebase Cloud Messaging (FCM Admin SDK)
+- **Security:** ASP.NET Core Rate Limiter, CORS Policies
+- **Documentation:** Swagger / OpenAPI (Swashbuckle)
 
 ---
 
-## 🚀 Yerel Kurulum & Çalıştırma
+## 🚀 Local Setup & Running
 
-Showcase'i yerel ortamda çalıştırmak için aşağıdaki bağımlılıkların kurulu olması gerekir:
+To explore or run the backend service locally:
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Docker & Docker Compose](https://www.docker.com/)
 
-### 1. Veritabanı & Redis Servislerini Başlatın
+### 1. Launch MongoDB & Redis
 ```bash
-# MongoDB ve Redis konteynerlerini ayağa kaldırın
 docker run -d --name didiyos-mongo -p 27017:27017 mongo:latest
 docker run -d --name didiyos-redis -p 6379:6379 redis:latest
 ```
 
-### 2. Projeyi Derleyin ve Çalıştırın
+### 2. Build & Run Application
 ```bash
-# Bağımlılıkları geri yükleyin ve derleyin
+# Restore dependencies and build solution
 dotnet restore DidiyosCsharpBackend.sln
 dotnet build DidiyosCsharpBackend.sln
 
-# Web API projesini başlatın
+# Start Web API host
 cd DidiyosCsharpBackend.WebAPI
 dotnet run
 ```
 
-### 3. Swagger Arayüzüne Erişin
-Tarayıcınızdan aşağıdaki adresi açarak interaktif API dokümantasyonunu inceleyebilirsiniz:
+### 3. Access Swagger UI
+Open your browser and navigate to:
 ```text
 https://localhost:7001/swagger
 ```
@@ -324,5 +336,5 @@ https://localhost:7001/swagger
 ---
 
 <div align="center">
-  <sub>Didiyos Platform © 2026. Tüm hakları saklıdır. Bu repository mimari ve teknik yetkinlik sunumu amacıyla paylaşılmıştır.</sub>
+  <sub>Didiyos Platform © 2026. All rights reserved. This repository is published strictly for architectural demonstration and portfolio purposes.</sub>
 </div>
